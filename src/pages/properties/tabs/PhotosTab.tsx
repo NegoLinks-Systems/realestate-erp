@@ -101,7 +101,7 @@ export default function PhotosTab() {
       ) : (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {list.map((p) => (
-            <div key={p.id} className="group relative overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <div key={p.id} className="group relative overflow-hidden rounded-lg border border-zinc-200 dark:border-[#1C1C34]">
               <SignedImage path={p.storage_path} alt={p.caption ?? ''} className="h-36 w-full object-cover" />
               {p.is_cover && (
                 <span className="absolute left-2 top-2 rounded bg-brand px-1.5 py-0.5 text-[10px] font-medium text-white">Cover</span>

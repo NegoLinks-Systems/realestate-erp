@@ -103,7 +103,7 @@ export default function UnitsTab() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Unit</th>
                   <th className="py-2 pr-4">Type</th>
                   <th className="py-2 pr-4">Beds</th>
@@ -117,7 +117,7 @@ export default function UnitsTab() {
                   <tr
                     key={u.id}
                     onClick={() => setSelected(u)}
-                    className="cursor-pointer border-b border-zinc-100 hover:bg-zinc-50 dark:border-zinc-800/60 dark:hover:bg-zinc-800/40"
+                    className="cursor-pointer border-b border-zinc-100 hover:bg-zinc-50 dark:border-[#1C1C34]/60 dark:hover:bg-zinc-800/40"
                   >
                     <td className="py-2.5 pr-4 font-mono text-xs font-medium">{u.unit_number}</td>
                     <td className="py-2.5 pr-4">{u.unit_type.replace('_', ' ')}</td>

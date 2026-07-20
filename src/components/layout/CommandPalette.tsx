@@ -38,8 +38,8 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[15vh]" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative w-full max-w-lg overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="flex items-center gap-2 border-b border-zinc-200 px-4 dark:border-zinc-800">
+      <div className="relative w-full max-w-lg overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-xl dark:border-[#1C1C34] dark:bg-[#131325]">
+        <div className="flex items-center gap-2 border-b border-zinc-200 px-4 dark:border-[#1C1C34]">
           <Search className="h-4 w-4 text-zinc-400" />
           <input
             autoFocus
@@ -54,7 +54,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             placeholder="Go to…"
             className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-zinc-400"
           />
-          <kbd className="rounded border border-zinc-300 px-1.5 font-mono text-[10px] text-zinc-500 dark:border-zinc-700">esc</kbd>
+          <kbd className="rounded border border-zinc-300 px-1.5 font-mono text-[10px] text-zinc-500 dark:border-[#1C1C34]">esc</kbd>
         </div>
         <ul className="max-h-72 overflow-y-auto p-2">
           {results.length === 0 && (

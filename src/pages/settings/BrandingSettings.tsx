@@ -74,7 +74,7 @@ export default function BrandingSettings() {
                   type="color"
                   value={HEX.test(colors[k]) ? colors[k] : '#000000'}
                   onChange={(e) => setColors((c) => ({ ...c, [k]: e.target.value }))}
-                  className="h-9 w-10 cursor-pointer rounded border border-zinc-300 dark:border-zinc-700"
+                  className="h-9 w-10 cursor-pointer rounded border border-zinc-300 dark:border-[#1C1C34]"
                   aria-label={`${k} colour`}
                 />
                 <Input value={colors[k]} onChange={(e) => setColors((c) => ({ ...c, [k]: e.target.value }))} />
@@ -87,7 +87,7 @@ export default function BrandingSettings() {
             </Field>
           </div>
         </CardBody>
-        <div className="flex justify-end border-t border-zinc-200 px-5 py-3 dark:border-zinc-800">
+        <div className="flex justify-end border-t border-zinc-200 px-5 py-3 dark:border-[#1C1C34]">
           <Button onClick={() => void saveColors()} disabled={mutation.isPending}>
             {mutation.isPending ? 'Saving…' : 'Save branding'}
           </Button>
@@ -98,7 +98,7 @@ export default function BrandingSettings() {
         <CardHeader title="Brand assets" subtitle="Uploads go to the 'branding' storage bucket." />
         <CardBody className="grid gap-4 md:grid-cols-2">
           {assets.map((a) => (
-            <div key={a.field} className="flex items-center justify-between gap-3 rounded-md border border-zinc-200 p-3 dark:border-zinc-800">
+            <div key={a.field} className="flex items-center justify-between gap-3 rounded-md border border-zinc-200 p-3 dark:border-[#1C1C34]">
               <div className="flex items-center gap-3">
                 {a.current ? (
                   <img src={a.current} alt="" className="h-10 w-10 rounded object-contain ring-1 ring-zinc-200 dark:ring-zinc-700" />

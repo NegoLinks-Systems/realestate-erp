@@ -100,4 +100,17 @@ export const rpc = {
   lowStockItems: () => unwrap<{ item_id: string; sku: string; name: string; total_quantity: number; reorder_level: number }[]>(
     supabase.rpc('low_stock_items')),
 
+
+  /** Super-Admin: toggle the org-wide DEMO MODE banner. */
+  setDemoMode: (on: boolean) => unwrap(supabase.rpc('set_demo_mode', { p_on: on })),
+
+  /** Super-Admin: generate interconnected demo data across core modules. */
+  loadDemoData: (scenario: string) =>
+    unwrap(supabase.rpc('load_demo_data', { p_scenario: scenario })) as Promise<{
+      scenario: string; properties: number; units: number; active_leases: number; invoices: number; payments: number; branches: number;
+    }>,
+
+  /** Super-Admin: remove all demo data and clear demo mode. */
+  deleteDemoData: () => unwrap(supabase.rpc('delete_demo_data')),
+
 };

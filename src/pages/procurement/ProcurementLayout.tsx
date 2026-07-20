@@ -26,7 +26,7 @@ export default function ProcurementLayout() {
   return (
     <div className="mx-auto max-w-6xl p-4 md:p-6">
       <h1 className="font-display text-xl font-semibold">Procurement & Inventory</h1>
-      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-[#1C1C34]">
         {TABS.map((t) => (
           <NavLink
             key={t.to}

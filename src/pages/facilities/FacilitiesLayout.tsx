@@ -27,7 +27,7 @@ export default function FacilitiesLayout() {
   return (
     <div className="mx-auto max-w-6xl p-4 md:p-6">
       <h1 className="font-display text-xl font-semibold">Facilities</h1>
-      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-[#1C1C34]">
         {TABS.map((t) => (
           <NavLink
             key={t.to}
@@ -121,7 +121,7 @@ export function AssetsList() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Asset</th>
                   <th className="py-2 pr-4">Category</th>
                   <th className="py-2 pr-4">Property</th>
@@ -131,7 +131,7 @@ export function AssetsList() {
               </thead>
               <tbody>
                 {rows.map((a) => (
-                  <tr key={a.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={a.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4">
                       <Link to={`/facilities/assets/${a.id}`} className="font-medium text-brand hover:underline">{a.name}</Link>
                       {a.serial_number && <span className="ml-1 font-mono text-xs text-zinc-400">{a.serial_number}</span>}

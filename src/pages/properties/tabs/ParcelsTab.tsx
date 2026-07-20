@@ -80,7 +80,7 @@ export default function ParcelsTab() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Parcel</th>
                   <th className="py-2 pr-4">Title</th>
                   <th className="py-2 pr-4">Title no.</th>
@@ -90,7 +90,7 @@ export default function ParcelsTab() {
               </thead>
               <tbody>
                 {list.map((p) => (
-                  <tr key={p.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={p.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4 font-mono text-xs">{p.parcel_number ?? '—'}</td>
                     <td className="py-2.5 pr-4">{p.title_type ?? '—'}</td>
                     <td className="py-2.5 pr-4 font-mono text-xs">{p.title_number ?? '—'}</td>

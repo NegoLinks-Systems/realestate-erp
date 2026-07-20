@@ -8,8 +8,12 @@ const TABS: { label: string; to: string; end?: boolean; module: Module }[] = [
   { label: 'Branding & theme', to: '/settings/branding', module: 'settings' },
   { label: 'Domain & deployment', to: '/settings/domain', module: 'settings' },
   { label: 'AI assistant', to: '/settings/ai', module: 'settings' },
+  { label: 'AI Platform', to: '/settings/ai-platform', module: 'settings' },
+  { label: 'Notifications', to: '/settings/notifications', module: 'settings' },
   { label: 'Branches', to: '/settings/branches', module: 'branches' },
   { label: 'Users & roles', to: '/settings/users', module: 'users' },
+  { label: 'Feature flags', to: '/settings/features', module: 'settings' },
+  { label: 'Demo data', to: '/settings/demo', module: 'settings' },
   { label: 'Activity log', to: '/settings/activity', module: 'audit' },
 ];
 
@@ -24,7 +28,7 @@ export default function SettingsLayout() {
       <p className="mt-1 text-sm text-zinc-500">
         Everything here rebrands the whole application — pages, documents, and emails read these values.
       </p>
-      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-[#1C1C34]">
         {tabs.map((t) => (
           <NavLink
             key={t.to}

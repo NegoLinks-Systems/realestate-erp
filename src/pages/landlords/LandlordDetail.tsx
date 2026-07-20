@@ -84,7 +84,7 @@ export default function LandlordDetail() {
         {l.user_id ? <Badge tone="green">portal linked</Badge> : <Badge tone="zinc">no portal login</Badge>}
       </div>
 
-      <div className="mt-4 flex gap-1 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mt-4 flex gap-1 border-b border-zinc-200 dark:border-[#1C1C34]">
         {(['Profile', 'Ownership'] as const).map((x) => (
           <button key={x} onClick={() => setTab(x)}
             className={`border-b-2 px-3 py-2 text-sm font-medium ${
@@ -134,7 +134,7 @@ export default function LandlordDetail() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                      <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                         <th className="py-2 pr-4">Property</th>
                         <th className="py-2 pr-4">Ownership</th>
                         <th className="py-2 pr-4">Mgmt fee</th>
@@ -143,7 +143,7 @@ export default function LandlordDetail() {
                     </thead>
                     <tbody>
                       {ownership.data!.map((o) => (
-                        <tr key={o.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <tr key={o.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                           <td className="py-2.5 pr-4">
                             <Link to={`/properties/${o.property_id}`} className="font-medium text-brand hover:underline">{o.property_name}</Link>
                             {o.unit_id && <span className="ml-1 text-xs text-zinc-400">(single unit)</span>}

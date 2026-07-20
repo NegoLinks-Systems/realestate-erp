@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
+import type { LucideIcon } from 'lucide-react';
 import { Loader2 } from 'lucide-react';
 
 export function Spinner({ className = 'h-5 w-5' }: { className?: string }) {
-  return <Loader2 className={`animate-spin text-zinc-400 ${className}`} />;
+  return <Loader2 className={`animate-spin text-[var(--accent-primary)] ${className}`} />;
 }
 
 export function PageSpinner() {
@@ -28,9 +29,12 @@ export function Badge({ children, tone = 'zinc' }: { children: ReactNode; tone?:
   );
 }
 
-export function EmptyState({ title, hint }: { title: string; hint?: string }) {
+export function EmptyState({ title, hint, icon: Icon }: { title: string; hint?: string; icon?: LucideIcon }) {
   return (
-    <div className="rounded-lg border border-dashed border-zinc-300 px-6 py-10 text-center dark:border-zinc-700">
+    <div className="rounded-lg border border-dashed border-zinc-300 px-6 py-10 text-center dark:border-[#1C1C34]">
+      {Icon && (
+        <Icon className="mx-auto mb-3 h-12 w-12" style={{ color: 'var(--accent-primary)', opacity: 0.4 }} />
+      )}
       <p className="text-sm font-medium">{title}</p>
       {hint && <p className="mt-1 text-sm text-zinc-500">{hint}</p>}
     </div>

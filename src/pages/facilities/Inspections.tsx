@@ -53,7 +53,7 @@ export function InspectionsList() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Title</th>
                   <th className="py-2 pr-4">Property</th>
                   <th className="py-2 pr-4">Date</th>
@@ -63,7 +63,7 @@ export function InspectionsList() {
               </thead>
               <tbody>
                 {inspections.data!.map((i) => (
-                  <tr key={i.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={i.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4">
                       <Link to={`/facilities/inspections/${i.id}`} className="font-medium text-brand hover:underline">{i.title}</Link>
                     </td>
@@ -257,7 +257,7 @@ export function InspectionDetail() {
                           className={`h-8 w-8 rounded-md border text-sm font-medium ${
                             it.score === n
                               ? 'border-brand bg-brand text-white'
-                              : 'border-zinc-200 text-zinc-500 hover:border-brand hover:text-brand dark:border-zinc-700'
+                              : 'border-zinc-200 text-zinc-500 hover:border-brand hover:text-brand dark:border-[#1C1C34]'
                           }`}
                         >
                           {n}
@@ -273,7 +273,7 @@ export function InspectionDetail() {
           )}
 
           {canEdit && !locked && insp.items.length > 0 && (
-            <div className="mt-4 flex justify-end border-t border-zinc-200 pt-4 dark:border-zinc-800">
+            <div className="mt-4 flex justify-end border-t border-zinc-200 pt-4 dark:border-[#1C1C34]">
               <Button onClick={() => complete.mutate()} disabled={complete.isPending}>
                 {complete.isPending ? 'Completing…' : 'Complete & lock inspection'}
               </Button>

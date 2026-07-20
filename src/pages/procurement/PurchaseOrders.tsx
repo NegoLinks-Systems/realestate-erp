@@ -58,7 +58,7 @@ export function PurchaseOrdersList() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
         <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as '' | PoStatus)}
-          className="w-48 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900">
+          className="w-48 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-[#1C1C34] dark:bg-[#131325]">
           <option value="">All statuses</option>
           {(['draft', 'issued', 'partially_received', 'received', 'closed', 'cancelled'] as PoStatus[]).map((s) => (
             <option key={s} value={s}>{s.replace('_', ' ')}</option>
@@ -74,7 +74,7 @@ export function PurchaseOrdersList() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">PO</th>
                   <th className="py-2 pr-4">Vendor</th>
                   <th className="py-2 pr-4">Value</th>
@@ -83,7 +83,7 @@ export function PurchaseOrdersList() {
               </thead>
               <tbody>
                 {rows.map((p) => (
-                  <tr key={p.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={p.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4">
                       <Link to={`/procurement/orders/${p.id}`} className="font-mono text-xs font-medium text-brand hover:underline">{p.po_number}</Link>
                     </td>
@@ -174,7 +174,7 @@ export function PurchaseOrderDetail() {
         <CardBody className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+              <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                 <th className="py-2 pr-4">Item</th>
                 <th className="py-2 pr-4">Ordered</th>
                 <th className="py-2 pr-4">Received</th>
@@ -186,7 +186,7 @@ export function PurchaseOrderDetail() {
               {order.lines.map((l) => {
                 const done = Number(l.received_qty) >= Number(l.quantity);
                 return (
-                  <tr key={l.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={l.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4 font-medium">{l.description}</td>
                     <td className="py-2.5 pr-4 tabular-nums">{Number(l.quantity)}</td>
                     <td className="py-2.5 pr-4 tabular-nums">
@@ -199,7 +199,7 @@ export function PurchaseOrderDetail() {
               })}
             </tbody>
             <tfoot>
-              <tr className="border-t border-zinc-200 dark:border-zinc-800">
+              <tr className="border-t border-zinc-200 dark:border-[#1C1C34]">
                 <td className="py-2 font-medium" colSpan={4}>Total</td>
                 <td className="py-2 font-display font-semibold tabular-nums">{money(total)}</td>
               </tr>

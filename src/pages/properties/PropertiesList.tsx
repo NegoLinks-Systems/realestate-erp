@@ -13,6 +13,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { usePermissions } from '../../hooks/usePermissions';
 import { Card, CardBody } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { ExportMenu } from '../../components/ui/ExportMenu';
 import { Field, Input, Select, Textarea } from '../../components/ui/Field';
 import { Dialog } from '../../components/ui/Dialog';
 import { EmptyState, PageSpinner, Toast } from '../../components/ui/Bits';
@@ -93,10 +94,11 @@ export default function PropertiesList() {
           <p className="mt-0.5 text-sm text-zinc-500">{rows.length} of {properties.data?.length ?? 0} in portfolio</p>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <div className="flex rounded-md border border-zinc-200 dark:border-zinc-800">
+          <div className="flex rounded-md border border-zinc-200 dark:border-[#1C1C34]">
             <button aria-label="Card view" onClick={() => setView('cards')} className={`p-2 ${view === 'cards' ? 'bg-zinc-100 dark:bg-zinc-800' : ''}`}><LayoutGrid className="h-4 w-4" /></button>
             <button aria-label="Table view" onClick={() => setView('table')} className={`p-2 ${view === 'table' ? 'bg-zinc-100 dark:bg-zinc-800' : ''}`}><List className="h-4 w-4" /></button>
           </div>
+          <ExportMenu rows={rows.map((p) => ({ Name: p.name, Type: p.property_type, Address: p.address ?? '', Status: p.status }))} filename="properties" sheetName="Properties" />
           {perms.can('properties', 'create') && (
             <Button onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4" /> Add property</Button>
           )}
@@ -137,7 +139,7 @@ export default function PropertiesList() {
             <CardBody className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                     <th className="py-2 pr-4">Name</th>
                     <th className="py-2 pr-4">Type</th>
                     <th className="py-2 pr-4">Branch</th>
@@ -147,7 +149,7 @@ export default function PropertiesList() {
                 </thead>
                 <tbody>
                   {rows.map((p) => (
-                    <tr key={p.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                    <tr key={p.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                       <td className="py-2.5 pr-4">
                         <Link to={`/properties/${p.id}`} className="font-medium text-brand hover:underline">{p.name}</Link>
                       </td>

@@ -89,7 +89,7 @@ export function InventoryPage() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Item</th>
                   <th className="py-2 pr-4">SKU</th>
                   <th className="py-2 pr-4">On hand</th>
@@ -102,7 +102,7 @@ export function InventoryPage() {
                 {rows.map((i) => {
                   const oh = totalQty.get(i.id) ?? 0;
                   return (
-                    <tr key={i.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                    <tr key={i.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                       <td className="py-2.5 pr-4 font-medium">
                         {i.name}
                         {lowIds.has(i.id) && <Badge tone="amber">low</Badge>}

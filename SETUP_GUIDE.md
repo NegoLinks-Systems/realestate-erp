@@ -296,6 +296,38 @@ or write data outside their role — the UI simply reflects what the database al
 
 ---
 
+---
+
+## A note on branding (NegoLinks shell + your organization)
+
+This product follows the NegoLinks enterprise branding model:
+
+- **Before login** — the login screen, splash and footer show the fixed **NegoLinks**
+  identity (gold logo, wordmark) with the Real Estate product accent (Estate Silver).
+  This is intentional and part of the enterprise standard; it isn't configurable.
+- **After login** — the app switches to **your organization's** branding: the logo,
+  name, colors and currency you set in **Settings** (Part 8) apply everywhere across
+  the modules, documents and reports.
+
+So you brand the *inside* of the app for your organization; the NegoLinks shell around
+the login remains constant. See `docs/UPGRADE_ROADMAP.md` for how the enterprise
+upgrade is being rolled out in phases.
+
+---
+
+## Turning on AI assistance (optional)
+
+The app ships with the NegoLinks Intelligence Engine wired end-to-end, but it needs a
+provider key to actually respond (keys are never stored in the database or browser):
+
+1. Choose a provider in **Settings → AI Platform** (default is Groq).
+2. Set that provider's API key as a Supabase secret, e.g.
+   `supabase secrets set GROQ_API_KEY=gsk_your_key`
+3. Deploy the function: `supabase functions deploy ai-chat`
+
+Until a key is set, the Executive Assistant shows a friendly “not configured” message
+rather than failing. Provider and model names are never shown to end users.
+
 ## Troubleshooting
 
 | Symptom | Likely cause and fix |

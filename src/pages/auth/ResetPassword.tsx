@@ -30,7 +30,7 @@ export default function ResetPassword() {
 
   return (
     <div className="flex min-h-full items-center justify-center bg-zinc-50 p-4 dark:bg-zinc-950">
-      <form onSubmit={onSubmit} className="w-full max-w-sm space-y-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <form onSubmit={onSubmit} className="w-full max-w-sm space-y-4 rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-[#1C1C34] dark:bg-[#131325]">
         <h1 className="font-display text-lg font-semibold">Choose a new password</h1>
         {!session && (
           <p className="text-sm text-amber-700 dark:text-amber-400">

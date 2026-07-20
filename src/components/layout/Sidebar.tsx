@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useBranding } from '../../providers/BrandingProvider';
 import { usePermissions } from '../../hooks/usePermissions';
+import { useFeatureFlags } from '../../hooks/useFeatureFlags';
 import { useAuth } from '../../hooks/useAuth';
 import { NAV_ITEMS } from './nav';
 
@@ -8,17 +9,19 @@ export function Sidebar({ collapsed, onNavigate }: { collapsed: boolean; onNavig
   const { organizationName, applicationName, logoUrl } = useBranding();
   const { user } = useAuth();
   const perms = usePermissions(user?.id);
+  const { isEnabled } = useFeatureFlags();
 
   const items = NAV_ITEMS.filter((i) => {
     if (i.roles && !i.roles.some((r) => perms.roles.includes(r))) return false;
     if (i.hideForRoles && !perms.isAdmin && i.hideForRoles.some((r) => perms.roles.includes(r))
         && perms.roles.every((r) => i.hideForRoles!.includes(r) || r === 'tenant' || r === 'landlord' || r === 'property_owner')) return false;
     if (i.module && !perms.can(i.module, 'view')) return false;
+    if (i.module && !['settings','users','audit','branches'].includes(i.module) && !isEnabled(i.module)) return false;
     return true;
   });
 
   return (
-    <nav className="flex h-full flex-col border-r border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+    <nav className="flex h-full flex-col border-r border-zinc-200 bg-white dark:border-[#1C1C34] dark:bg-[#0E0E1C]">
       <div className="flex items-center gap-3 px-4 py-4">
         {logoUrl ? (
           <img src={logoUrl} alt="" className="h-8 w-8 rounded object-contain" />
@@ -44,8 +47,8 @@ export function Sidebar({ collapsed, onNavigate }: { collapsed: boolean; onNavig
               className={({ isActive }) =>
                 `nav-tick flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50'
-                    : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/60 dark:hover:text-zinc-100'
+                    ? 'bg-zinc-100 text-zinc-900 dark:bg-[var(--accent-glow)] dark:text-[var(--accent-light)]'
+                    : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-[#A0A0B8] dark:hover:bg-white/5 dark:hover:text-white'
                 }`
               }
             >

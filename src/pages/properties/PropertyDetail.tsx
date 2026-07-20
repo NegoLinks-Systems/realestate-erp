@@ -103,7 +103,7 @@ export default function PropertyDetail() {
         </div>
       </div>
 
-      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mt-4 flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-[#1C1C34]">
         {tabs.map((t) => (
           <NavLink
             key={t.to}

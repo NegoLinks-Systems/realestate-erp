@@ -10,6 +10,7 @@ import { usePermissions } from '../../hooks/usePermissions';
 import { useMoney } from '../../providers/BrandingProvider';
 import { Card, CardBody, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { ExportMenu } from '../../components/ui/ExportMenu';
 import { Field, Select, Textarea } from '../../components/ui/Field';
 import { Dialog } from '../../components/ui/Dialog';
 import { Badge, EmptyState, PageSpinner, Toast } from '../../components/ui/Bits';
@@ -49,6 +50,19 @@ export function InvoicesList() {
           {INVOICE_STATUSES.map((s) => <option key={s} value={s}>{s.replace('_', ' ')}</option>)}
         </Select>
         <span className="text-sm text-zinc-500">{rows.length} invoices</span>
+        <div className="ml-auto">
+          <ExportMenu
+            rows={rows.map((i) => ({
+              Invoice: i.invoice_number,
+              Total: Number(i.total),
+              Paid: Number(i.amount_paid),
+              Balance: Math.max(0, Number(i.total) - Number(i.amount_paid)),
+              Status: i.status,
+              Due: i.due_date,
+            }))}
+            filename="invoices" sheetName="Invoices"
+          />
+        </div>
       </div>
 
       {rows.length === 0 ? (
@@ -61,7 +75,7 @@ export function InvoicesList() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Invoice</th>
                   <th className="py-2 pr-4">Tenant</th>
                   <th className="py-2 pr-4">Due</th>
@@ -74,7 +88,7 @@ export function InvoicesList() {
                 {rows.map((i) => {
                   const balance = Math.max(0, Number(i.total) - Number(i.amount_paid));
                   return (
-                    <tr key={i.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                    <tr key={i.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                       <td className="py-2.5 pr-4">
                         <Link to={`/finance/invoices/${i.id}`} className="font-mono text-xs font-medium text-brand hover:underline">
                           {i.invoice_number}
@@ -159,7 +173,7 @@ export function InvoiceDetail() {
           <table className="w-full text-sm">
             <tbody>
               {inv.lines.map((l) => (
-                <tr key={l.id} className="border-b border-zinc-100 last:border-0 dark:border-zinc-800/60">
+                <tr key={l.id} className="border-b border-zinc-100 last:border-0 dark:border-[#1C1C34]/60">
                   <td className="py-2">
                     <span className="font-medium">{l.description}</span>
                     <Badge tone={l.line_type === 'penalty' ? 'red' : 'zinc'}>{l.line_type.replace('_', ' ')}</Badge>
@@ -169,7 +183,7 @@ export function InvoiceDetail() {
               ))}
             </tbody>
             <tfoot>
-              <tr className="border-t border-zinc-200 dark:border-zinc-800">
+              <tr className="border-t border-zinc-200 dark:border-[#1C1C34]">
                 <td className="py-2 font-medium">Total</td>
                 <td className="py-2 text-right font-display font-semibold tabular-nums">{money(Number(inv.total))}</td>
               </tr>
@@ -248,7 +262,7 @@ export function PaymentsPage() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Date</th>
                   <th className="py-2 pr-4">Tenant</th>
                   <th className="py-2 pr-4">Method</th>
@@ -258,7 +272,7 @@ export function PaymentsPage() {
               </thead>
               <tbody>
                 {payments.data!.map((p) => (
-                  <tr key={p.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={p.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4 font-mono text-xs">{new Date(p.received_at).toLocaleDateString()}</td>
                     <td className="py-2.5 pr-4">{p.tenant_name}</td>
                     <td className="py-2.5 pr-4">{p.method.replace('_', ' ')}</td>
@@ -355,7 +369,7 @@ function RecordPaymentForm({ onDone }: { onDone: (m: string, t?: 'ok' | 'err') =
       )}
       <div className="grid grid-cols-2 gap-3">
         <Field label="Amount"><input type="number" min={0} step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)}
-          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 dark:border-zinc-700 dark:bg-zinc-900" /></Field>
+          className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 dark:border-[#1C1C34] dark:bg-[#131325]" /></Field>
         <Field label="Method">
           <Select value={method} onChange={(e) => setMethod(e.target.value as PaymentMethod)}>
             <option value="cash">Cash</option>
@@ -367,7 +381,7 @@ function RecordPaymentForm({ onDone }: { onDone: (m: string, t?: 'ok' | 'err') =
         </Field>
       </div>
       <Field label="Reference (optional)"><input value={reference} onChange={(e) => setReference(e.target.value)}
-        className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 dark:border-zinc-700 dark:bg-zinc-900" /></Field>
+        className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 dark:border-[#1C1C34] dark:bg-[#131325]" /></Field>
       <p className="text-xs text-zinc-500">Allocates to the oldest unpaid invoices first, then forward.</p>
       <div className="flex justify-end">
         <Button onClick={() => void submit()} disabled={pending}>{pending ? 'Recording…' : 'Record payment'}</Button>

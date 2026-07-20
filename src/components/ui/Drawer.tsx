@@ -13,10 +13,10 @@ export function Drawer({
   return (
     <div className="fixed inset-0 z-50" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col border-l border-zinc-200 bg-white shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="flex items-center justify-between border-b border-zinc-200 px-5 py-3.5 dark:border-zinc-800">
+      <div className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col border-l border-zinc-200 bg-white shadow-xl dark:border-[#1C1C34] dark:bg-[#131325]">
+        <div className="flex items-center justify-between border-b border-zinc-200 px-5 py-3.5 dark:border-[#1C1C34]">
           <h3 className="font-display text-sm font-semibold">{title}</h3>
-          <button onClick={onClose} aria-label="Close" className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800">
+          <button onClick={onClose} aria-label="Close" className="rounded p-1 hover:bg-zinc-100 dark:hover:bg-white/5">
             <X className="h-4 w-4" />
           </button>
         </div>

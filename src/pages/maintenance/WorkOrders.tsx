@@ -65,7 +65,7 @@ export function WorkOrdersList() {
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Title</th>
                   <th className="py-2 pr-4">Property</th>
                   <th className="py-2 pr-4">Contractor</th>
@@ -75,7 +75,7 @@ export function WorkOrdersList() {
               </thead>
               <tbody>
                 {rows.map((w) => (
-                  <tr key={w.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={w.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4">
                       <Link to={`/maintenance/work-orders/${w.id}`} className="font-medium text-brand hover:underline">{w.title}</Link>
                     </td>
@@ -203,7 +203,7 @@ export function WorkOrderDetail() {
               <table className="w-full text-sm">
                 <tbody>
                   {order.items.map((it) => (
-                    <tr key={it.id} className="border-b border-zinc-100 last:border-0 dark:border-zinc-800/60">
+                    <tr key={it.id} className="border-b border-zinc-100 last:border-0 dark:border-[#1C1C34]/60">
                       <td className="py-2">
                         <span className="font-medium">{it.description}</span>
                         <Badge tone="zinc">{it.item_type}</Badge>
@@ -221,7 +221,7 @@ export function WorkOrderDetail() {
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr className="border-t border-zinc-200 dark:border-zinc-800">
+                  <tr className="border-t border-zinc-200 dark:border-[#1C1C34]">
                     <td className="py-2 font-medium">Total</td>
                     <td className="py-2 text-right font-display font-semibold tabular-nums">{money(Number(order.total_cost))}</td>
                     {canUpdate && !locked && <td />}

@@ -115,7 +115,7 @@ export default function VisitorsPage() {
             <CardBody className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                     <th className="py-2 pr-4">Visitor</th>
                     <th className="py-2 pr-4">Property</th>
                     <th className="py-2 pr-4">Valid until</th>
@@ -125,7 +125,7 @@ export default function VisitorsPage() {
                 </thead>
                 <tbody>
                   {rows.map((p) => (
-                    <tr key={p.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                    <tr key={p.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                       <td className="py-2.5 pr-4">
                         <span className="font-medium">{p.visitor?.full_name ?? '—'}</span>
                         {p.visitor?.phone && <span className="ml-1 text-xs text-zinc-400">{p.visitor.phone}</span>}

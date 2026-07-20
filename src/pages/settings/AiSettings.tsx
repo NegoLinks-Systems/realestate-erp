@@ -48,7 +48,7 @@ export default function AiSettings() {
           <Input value={tagline} onChange={(e) => setTagline(e.target.value)} />
         </Field>
       </CardBody>
-      <div className="flex justify-end border-t border-zinc-200 px-5 py-3 dark:border-zinc-800">
+      <div className="flex justify-end border-t border-zinc-200 px-5 py-3 dark:border-[#1C1C34]">
         <Button onClick={() => void save()} disabled={mutation.isPending}>
           {mutation.isPending ? 'Saving…' : 'Save changes'}
         </Button>

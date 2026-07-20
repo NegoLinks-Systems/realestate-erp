@@ -1,3 +1,58 @@
+UPGRADE IN PROGRESS — aligning to NegoLinks Enterprise Standards (see
+docs/UPGRADE_ROADMAP.md). Phase 1 (Enterprise Design System & Branding)
+is DONE: dark base + Estate Silver accent tokens in index.css bridged to
+the existing --brand-primary (so all bg-brand/text-brand usages inherit
+the accent), Inter/Poppins/JetBrains Mono fonts, gold NegoLinks logo +
+Splash in src/components/brand/NegoLinks.tsx, enterprise split-hero
+Login, footer in AppShell, dark-by-default. Pre-login shell carries
+fixed NegoLinks branding; post-login BrandingProvider applies the org's
+branding (reconciles the original zero-brand rule with the enterprise
+standard — Part 6). Build + tsc clean. Phase 2 (enterprise layout & shared component library) is DONE:
+all shared primitives + sidebar/navbar retuned to NegoLinks surfaces
+(card #131325, surface #0E0E1C, border #1C1C34) with Estate Silver
+accent active states; safe mechanical surface pass across all pages;
+added PageHeader + DemoModeBanner (inert) + EmptyState icon. Build +
+tsc clean. Phase 3 (dashboards & analytics) is DONE: shared KPICard/ChartCard/
+SmartInsights + recharts theme; executive dashboard rebuilt with KPI
+row + collections-trend area chart + occupancy donut + arrears-aging
+bar + maintenance-throughput bar, all from live data, permission-gated,
+honest empty states. Smart Insights are data-derived (not LLM). recharts
+added (~354KB gz bundle; code-split in Phase 7). Build + tsc clean.
+Phase 4 (feature flags + Demo Data Manager) is DONE: migration 00019
+(TESTED from scratch on PG16) adds feature_flags/demo_mode/is_demo +
+set_demo_mode + load_demo_data(scenario)/delete_demo_data; Feature Flags
+page (Super Admin) with useFeatureFlags hook gating the sidebar; Demo
+Data Manager (Super Admin) with scenario library + confirmations +
+DEMO MODE banner activation, generating coherent cross-module demo data
+(leases occupy units, invoices/payments feed dashboards) verified at 70%
+occupancy/87% collection; delete purges only is_demo rows. Build+tsc
+clean. Phase 5 (AI platform) is DONE: migration 00020 (TESTED) adds
+ai_providers (11, Groq default, no key col)/ai_prompt_templates/
+ai_usage_logs/org_ai_memory + ai_config; real ai-chat Edge Function
+(JWT verify, 200/hr limit, provider key from Supabase secret, provider
+hidden, usage logged); Executive Assistant navbar panel (gated on
+ai_assistant flag) + Settings>AI Platform (provider/params/module
+toggles/prompt templates/usage dashboard). Build+tsc clean. AI returns
+responses only once a provider key secret is set + ai-chat deployed
+(honest integration point; no fake responses). Phase 6 (universal search + notification channels) is DONE:
+UniversalSearch (replaces page-only palette) searches real data across
+permitted modules (properties/tenants/landlords/invoices/units/work
+orders) + pages, permission-scoped, with an AI hand-off to the
+Executive Assistant; migration 00021 (TESTED) adds notification_config +
+per-user notification_preferences + effective_notification_channels()
+fn; Notification Preferences settings page. Build+tsc clean. NOTE:
+actual email/SMS/WhatsApp/push SENDING + the configurable workflow
+engine moved to Phase 7 (coupled with Communication Center + need
+credentials) rather than shipped as untested stubs. Phase 7 IN PROGRESS. Done+verified: PERFORMANCE code-split (vendor
+chunking + lazy recharts pages; main chunk 364->172KB gz; recharts &
+xlsx now lazy, out of initial bundle) and REPORTS export (exportCSV/
+exportXLSX with on-demand SheetJS + reusable ExportMenu wired into
+Tenants/Properties/Invoices). Build+tsc clean. REMAINING (credential-
+dependent or large, deliberately not stubbed): PDF/DOCX letterhead
+export, Communication Center multi-channel SENDING (needs provider
+creds), configurable workflow engine, and ops groundwork (jobs/backup/
+system-health/API versioning).
+
 # Project: White-Label Real Estate & Property Management ERP
 
 ## State of the project

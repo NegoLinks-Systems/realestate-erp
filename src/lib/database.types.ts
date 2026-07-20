@@ -85,7 +85,80 @@ export type OrganizationSettingsRow = {
   ai_branding: Json;
   email_template_defaults: Json;
   document_template_defaults: Json;
+  feature_flags: Json;
+  demo_mode: boolean;
+  ai_config: Json;
+  notification_config: Json;
   created_at: string;
+  updated_at: string;
+}
+
+export type NotificationPreferenceRow = {
+  id: string;
+  user_id: string;
+  in_app: boolean;
+  email: boolean;
+  sms: boolean;
+  whatsapp: boolean;
+  push: boolean;
+  digest: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export type AiProviderRow = {
+  id: string;
+  provider_key: string;
+  label: string;
+  base_url: string;
+  default_model: string | null;
+  api_style: string;
+  secret_name: string;
+  enabled: boolean;
+  is_default: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
+export type AiPromptTemplateRow = {
+  id: string;
+  template_key: string;
+  name: string;
+  description: string | null;
+  module: string | null;
+  system_prompt: string;
+  default_prompt: string;
+  is_builtin: boolean;
+  updated_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type AiUsageLogRow = {
+  id: string;
+  user_id: string | null;
+  module: string | null;
+  action: string;
+  provider_used: string | null;
+  model_used: string | null;
+  prompt_tokens: number;
+  completion_tokens: number;
+  response_time_ms: number | null;
+  status: string;
+  error_message: string | null;
+  created_at: string;
+}
+
+export type OrgAiMemoryRow = {
+  id: string;
+  singleton: boolean;
+  business_context: string | null;
+  preferred_report_style: string;
+  preferred_tone: string;
+  custom_terminology: Json;
+  abbreviations: Json;
+  faq: Json;
+  auto_learn: boolean;
   updated_at: string;
 }
 
@@ -893,6 +966,11 @@ export type Database = {
   public: {
     Tables: {
       organization_settings: Table<OrganizationSettingsRow>;
+      ai_providers: Table<AiProviderRow>;
+      ai_prompt_templates: Table<AiPromptTemplateRow>;
+      ai_usage_logs: Table<AiUsageLogRow>;
+      org_ai_memory: Table<OrgAiMemoryRow>;
+      notification_preferences: Table<NotificationPreferenceRow>;
       branches: Table<BranchRow>;
       user_profiles: Table<UserProfileRow>;
       user_roles: Table<UserRoleRow>;
@@ -1001,6 +1079,9 @@ export type Database = {
         Args: Record<string, never>;
         Returns: { item_id: string; sku: string; name: string; total_quantity: number; reorder_level: number }[];
       };
+      set_demo_mode: { Args: { p_on: boolean }; Returns: undefined };
+      load_demo_data: { Args: { p_scenario?: string }; Returns: Json };
+      delete_demo_data: { Args: Record<string, never>; Returns: undefined };
     };
     Enums: {
       app_role: AppRole;

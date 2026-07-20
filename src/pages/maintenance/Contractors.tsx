@@ -150,7 +150,7 @@ function ContractorForm({ existing, onSubmit, pending }: { existing: ContractorR
               type="button"
               onClick={() => toggleTrade(t)}
               className={`rounded-full border px-3 py-1 text-xs font-medium ${
-                v.trades.includes(t) ? 'border-brand bg-brand/10 text-brand' : 'border-zinc-200 text-zinc-600 dark:border-zinc-800 dark:text-zinc-400'
+                v.trades.includes(t) ? 'border-brand bg-brand/10 text-brand' : 'border-zinc-200 text-zinc-600 dark:border-[#1C1C34] dark:text-zinc-400'
               }`}
             >
               {t}

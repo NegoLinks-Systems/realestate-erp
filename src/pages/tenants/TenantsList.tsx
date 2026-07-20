@@ -13,6 +13,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { usePermissions } from '../../hooks/usePermissions';
 import { Card, CardBody } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { ExportMenu } from '../../components/ui/ExportMenu';
 import { Field, Input, Select } from '../../components/ui/Field';
 import { Dialog } from '../../components/ui/Dialog';
 import { Badge, EmptyState, PageSpinner, Toast } from '../../components/ui/Bits';
@@ -66,9 +67,12 @@ export default function TenantsList() {
           <h1 className="font-display text-xl font-semibold">Tenants</h1>
           <p className="mt-0.5 text-sm text-zinc-500">{rows.length} of {tenants.data?.length ?? 0}</p>
         </div>
-        {perms.can('tenants', 'create') && (
-          <Button className="ml-auto" onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4" /> Add tenant</Button>
-        )}
+        <div className="ml-auto flex items-center gap-2">
+          <ExportMenu rows={rows.map((t) => ({ Name: t.full_name, Phone: t.phone ?? '', Email: t.email ?? '' }))} filename="tenants" sheetName="Tenants" />
+          {perms.can('tenants', 'create') && (
+            <Button onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4" /> Add tenant</Button>
+          )}
+        </div>
       </div>
       <Input placeholder="Search name, phone, email…" value={q} onChange={(e) => setQ(e.target.value)} className="mt-4 max-w-sm" />
 
@@ -80,7 +84,7 @@ export default function TenantsList() {
             <CardBody className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                     <th className="py-2 pr-4">Name</th>
                     <th className="py-2 pr-4">Kind</th>
                     <th className="py-2 pr-4">Phone</th>
@@ -90,7 +94,7 @@ export default function TenantsList() {
                 </thead>
                 <tbody>
                   {rows.map((t) => (
-                    <tr key={t.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                    <tr key={t.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                       <td className="py-2.5 pr-4">
                         <Link to={`/tenants/${t.id}`} className="font-medium text-brand hover:underline">{t.full_name}</Link>
                       </td>

@@ -6,8 +6,8 @@ const styles: Record<Variant, string> = {
   primary:
     'bg-brand text-white hover:opacity-90 disabled:opacity-50 shadow-sm',
   outline:
-    'border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800',
-  ghost: 'hover:bg-zinc-100 dark:hover:bg-zinc-800',
+    'border border-zinc-300 dark:border-[#1C1C34] hover:bg-zinc-100 dark:hover:bg-white/5',
+  ghost: 'hover:bg-zinc-100 dark:hover:bg-white/5',
   danger: 'bg-red-600 text-white hover:bg-red-500 disabled:opacity-50',
 };
 

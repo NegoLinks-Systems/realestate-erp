@@ -54,7 +54,7 @@ export default function ParkingPage() {
       </div>
       <p className="mt-1 text-sm text-zinc-500">Monthly parking fees invoice tenants automatically through Finance; run it on demand here.</p>
 
-      <div className="mt-4 flex gap-1 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mt-4 flex gap-1 border-b border-zinc-200 dark:border-[#1C1C34]">
         {TABS.map((x) => (
           <button key={x} onClick={() => setTab(x)}
             className={`border-b-2 px-3 py-2 text-sm font-medium ${
@@ -122,7 +122,7 @@ function SpacesTab({ canEdit, flash }: { canEdit: boolean; flash: (m: string, t?
                 ) : (
                   <div className="flex flex-wrap gap-2">
                     {zSpaces.map((s) => (
-                      <span key={s.id} className="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 px-2.5 py-1 text-sm dark:border-zinc-800">
+                      <span key={s.id} className="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 px-2.5 py-1 text-sm dark:border-[#1C1C34]">
                         <span className="font-mono text-xs font-medium">{s.space_number}</span>
                         <span className="text-xs text-zinc-400">{s.space_type}</span>
                         <SpaceStatusBadge status={s.status} />
@@ -276,7 +276,7 @@ function AllocationsTab({ canEdit, money, flash }: { canEdit: boolean; money: (n
           <CardBody className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                   <th className="py-2 pr-4">Space</th>
                   <th className="py-2 pr-4">Tenant</th>
                   <th className="py-2 pr-4">Monthly fee</th>
@@ -286,7 +286,7 @@ function AllocationsTab({ canEdit, money, flash }: { canEdit: boolean; money: (n
               </thead>
               <tbody>
                 {allocations.data!.map((a) => (
-                  <tr key={a.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                  <tr key={a.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                     <td className="py-2.5 pr-4 font-mono text-xs font-medium">{a.space_number}</td>
                     <td className="py-2.5 pr-4">{a.tenant_name}</td>
                     <td className="py-2.5 pr-4 tabular-nums">{money(Number(a.monthly_fee))}</td>

@@ -92,7 +92,7 @@ export default function LeasesList() {
             <CardBody className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800">
+                  <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-[#1C1C34]">
                     <th className="py-2 pr-4">Unit</th>
                     <th className="py-2 pr-4">Tenant</th>
                     <th className="py-2 pr-4">Period</th>
@@ -102,7 +102,7 @@ export default function LeasesList() {
                 </thead>
                 <tbody>
                   {rows.map((l) => (
-                    <tr key={l.id} className="border-b border-zinc-100 dark:border-zinc-800/60">
+                    <tr key={l.id} className="border-b border-zinc-100 dark:border-[#1C1C34]/60">
                       <td className="py-2.5 pr-4">
                         <Link to={`/leases/${l.id}`} className="font-mono text-xs font-medium text-brand hover:underline">{l.unit_number}</Link>
                       </td>
@@ -142,7 +142,7 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
       className={`rounded-full border px-3 py-1 text-xs font-medium ${
         active
           ? 'border-brand bg-brand/10 text-brand'
-          : 'border-zinc-200 text-zinc-600 hover:border-zinc-300 dark:border-zinc-800 dark:text-zinc-400'
+          : 'border-zinc-200 text-zinc-600 hover:border-zinc-300 dark:border-[#1C1C34] dark:text-zinc-400'
       }`}
     >
       {children}

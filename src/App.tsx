@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
 import { RequireAuth } from './components/RequireAuth';
@@ -5,7 +6,11 @@ import { RequirePermission } from './components/RequirePermission';
 import Login from './pages/auth/Login';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
-import Dashboard from './pages/Dashboard';
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+import FeatureFlags from './pages/settings/FeatureFlags';
+import DemoDataManager from './pages/settings/DemoDataManager';
+const AiPlatform = lazy(() => import('./pages/settings/AiPlatform'));
+import NotificationPreferences from './pages/settings/NotificationPreferences';
 import PropertiesList from './pages/properties/PropertiesList';
 import PropertyDetail from './pages/properties/PropertyDetail';
 import OverviewTab from './pages/properties/tabs/OverviewTab';
@@ -50,7 +55,8 @@ import ActivityLog from './pages/settings/ActivityLog';
 
 export default function App() {
   return (
-    <Routes>
+    <Suspense fallback={<div style={{minHeight:"100vh"}} />}>
+      <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
@@ -118,9 +124,14 @@ export default function App() {
           <Route path="ai" element={<RequirePermission module="settings" action="update"><AiSettings /></RequirePermission>} />
           <Route path="branches" element={<RequirePermission module="branches"><Branches /></RequirePermission>} />
           <Route path="users" element={<RequirePermission module="users"><UsersRoles /></RequirePermission>} />
+          <Route path="features" element={<FeatureFlags />} />
+          <Route path="demo" element={<DemoDataManager />} />
+          <Route path="ai-platform" element={<AiPlatform />} />
+          <Route path="notifications" element={<NotificationPreferences />} />
           <Route path="activity" element={<RequirePermission module="audit"><ActivityLog /></RequirePermission>} />
         </Route>
       </Route>
     </Routes>
+      </Suspense>
   );
 }

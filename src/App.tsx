@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
 import { RequireAuth } from './components/RequireAuth';
@@ -6,10 +5,10 @@ import { RequirePermission } from './components/RequirePermission';
 import Login from './pages/auth/Login';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
-const Dashboard = lazy(() => import('./pages/Dashboard'));
+import Dashboard from './pages/Dashboard';
 import FeatureFlags from './pages/settings/FeatureFlags';
 import DemoDataManager from './pages/settings/DemoDataManager';
-const AiPlatform = lazy(() => import('./pages/settings/AiPlatform'));
+import AiPlatform from './pages/settings/AiPlatform';
 import NotificationPreferences from './pages/settings/NotificationPreferences';
 import PropertiesList from './pages/properties/PropertiesList';
 import PropertyDetail from './pages/properties/PropertyDetail';
@@ -55,8 +54,7 @@ import ActivityLog from './pages/settings/ActivityLog';
 
 export default function App() {
   return (
-    <Suspense fallback={<div style={{minHeight:"100vh"}} />}>
-      <Routes>
+    <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
@@ -132,6 +130,5 @@ export default function App() {
         </Route>
       </Route>
     </Routes>
-      </Suspense>
   );
 }

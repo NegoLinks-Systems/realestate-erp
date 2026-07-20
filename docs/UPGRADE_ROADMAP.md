@@ -175,6 +175,12 @@ here as an untested stub.
 
 ### ◑ Phase 7 — Platform Completion (in progress)
 
+> **Incident (resolved):** a silent render loop in `UniversalSearch` (unstable
+> `perms` object in effect deps + fresh-array setState) starved React Router's
+> transition-based navigation in production — URL changed, view didn't. Found by
+> bisecting the real production bundle in headless Chromium; fixed with stable
+> deps + bail-out updates + conditional mounting; guarded by `e2e/nav.e2e.mjs`.
+
 **Done and verified this phase:**
 - **Performance — code-splitting/lazy-loading.** Vendor chunking (recharts, react,
   supabase) + lazy-loaded the recharts-heavy pages. The main JS chunk dropped from

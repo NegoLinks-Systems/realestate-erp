@@ -102,7 +102,9 @@ export function AppShell() {
       </div>
 
       {isEnabled('ai_assistant') && <AIPanel open={aiOpen} onClose={() => setAiOpen(false)} seed={aiSeed} />}
-      <UniversalSearch open={paletteOpen} onClose={() => setPaletteOpen(false)} onAskAI={(q) => { setAiSeed(q); setAiOpen(true); }} />
+      {paletteOpen && (
+        <UniversalSearch open onClose={() => setPaletteOpen(false)} onAskAI={(q) => { setAiSeed(q); setAiOpen(true); }} />
+      )}
     </div>
   );
 }

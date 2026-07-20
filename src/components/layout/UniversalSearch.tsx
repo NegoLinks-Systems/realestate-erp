@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Sparkles, Building2, Users2, UserSquare2, Receipt, DoorOpen, Wrench, CornerDownLeft, FileText } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -62,22 +62,32 @@ export function UniversalSearch({ open, onClose, onAskAI }: { open: boolean; onC
 
   const aiOn = isEnabled('ai_assistant') && !!onAskAI;
 
-  // page routes (existing behaviour)
-  const pageHits: Hit[] = useMemo(() => {
-    const allowed = PALETTE_ROUTES.filter((r) => !r.module || perms.can(r.module, 'view'));
-    const q = query.trim().toLowerCase();
-    const list = q ? allowed.filter((r) => r.label.toLowerCase().includes(q)) : allowed;
-    return list.map((r) => ({ id: r.path, label: r.label, path: r.path, group: 'Pages', icon: FileText }));
-  }, [query, perms]);
+  // Stable dependency key: `perms` is a new object every render, so it must never
+  // appear in dependency arrays. This string only changes when access truly changes.
+  const allowedKey = SOURCES.map((src) => (perms.can(src.module, 'view') || perms.isAdmin ? src.group : '')).join('|') + (perms.isAdmin ? '*' : '');
+
+  // page routes (existing behaviour) — cheap, computed per render
+  const allowedRoutes = PALETTE_ROUTES.filter((r) => !r.module || perms.can(r.module, 'view'));
+  const qLower = query.trim().toLowerCase();
+  const pageHits: Hit[] = (qLower ? allowedRoutes.filter((r) => r.label.toLowerCase().includes(qLower)) : allowedRoutes)
+    .map((r) => ({ id: r.path, label: r.label, path: r.path, group: 'Pages', icon: FileText }));
 
   useEffect(() => { if (open) { setQuery(''); setDataHits([]); setIndex(0); } }, [open]);
 
-  // debounced cross-module data search
+  // debounced cross-module data search.
+  // CRITICAL: deps must be stable values ([query, allowedKey]) — never the `perms`
+  // object — and the empty-clear must bail out when already empty. An unstable
+  // object dep + fresh-array setState here caused a silent render loop that
+  // starved React Router's startTransition and froze all navigation.
   useEffect(() => {
     setIndex(0);
     if (debounce.current) clearTimeout(debounce.current);
     const q = query.trim();
-    if (q.length < 2) { setDataHits([]); setLoading(false); return; }
+    if (q.length < 2) {
+      setDataHits((prev) => (prev.length ? [] : prev));
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     debounce.current = setTimeout(async () => {
       const sources = SOURCES.filter((s) => perms.can(s.module, 'view') || perms.isAdmin);
@@ -86,14 +96,15 @@ export function UniversalSearch({ open, onClose, onAskAI }: { open: boolean; onC
       setLoading(false);
     }, 220);
     return () => { if (debounce.current) clearTimeout(debounce.current); };
-  }, [query, perms]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, allowedKey]);
 
-  const allHits = useMemo(() => [...dataHits, ...pageHits], [dataHits, pageHits]);
-  const grouped = useMemo(() => {
+  const allHits = [...dataHits, ...pageHits];
+  const grouped = (() => {
     const g = new Map<string, Hit[]>();
     for (const h of allHits) { if (!g.has(h.group)) g.set(h.group, []); g.get(h.group)!.push(h); }
     return [...g.entries()];
-  }, [allHits]);
+  })();
 
   if (!open) return null;
 

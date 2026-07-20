@@ -1,3 +1,21 @@
+INCIDENT RESOLVED (post-Phase-7): production navigation freeze — URL
+changed on click but view never updated until hard refresh. ROOT CAUSE:
+UniversalSearch (Phase 6) was always mounted with a useEffect depending
+on the `perms` OBJECT (usePermissions returns a new object every render)
+and calling setDataHits([]) with a fresh array -> silent infinite
+passive-effect render loop (no errors) whose urgent updates perpetually
+preempted React Router v7 startTransition -> nav never committed. NOT
+the cause (each disproven by real-browser bisection with Playwright on
+the prod bundle): route-level Suspense/lazy (reverted earlier,
+harmless), vite manualChunks (restored, innocent), react-router
+7.18.1+React 19.2 (bare skeleton fine), stale Vercel deploy. FIX:
+stable `allowedKey` string dep instead of `perms`; bail-out clear
+setDataHits(prev => prev.length ? [] : prev); palette mounted only
+while open. VERIFIED: e2e/nav.e2e.mjs (real prod bundle + Chromium +
+mocked Supabase) -> NAVIGATION_OK incl. palette open/type/close.
+RULES: never put hook-returned objects (perms/branding/settings) in dep
+arrays; any always-mounted shell change must pass e2e/nav.e2e.mjs.
+
 UPGRADE IN PROGRESS — aligning to NegoLinks Enterprise Standards (see
 docs/UPGRADE_ROADMAP.md). Phase 1 (Enterprise Design System & Branding)
 is DONE: dark base + Estate Silver accent tokens in index.css bridged to
